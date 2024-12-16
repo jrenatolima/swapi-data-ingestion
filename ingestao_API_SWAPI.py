@@ -29,25 +29,25 @@ def coletar_dados(api_url, categoria, paginas=5):
     if categoria == "films":  #Caso films (sem paginação)
         url = api_url
         try:
-            response = requests.get(url, timeout=10)
-            if response.status_code == 200:
-                results = response.json().get('results', [])
-                dados.extend(processar_dados(results, chaves_lista))
+            resposta = requests.get(url, timeout=10)
+            if resposta.status_code == 200:
+                resultados = resposta.json().get('results', [])
+                dados.extend(processar_dados(resultados, chaves_lista))
             else:
-                print(f"Erro: Status {response.status_code}")
+                print(f"Erro: Status {resposta.status_code}")
         except requests.exceptions.RequestException as e:
             print(f"Erro: {e}")
     else:  #Casos paginados (people e planets)
         for page in range(1, paginas + 1):
             url = f"{api_url}?page={page}"
             try:
-                response = requests.get(url, timeout=10)
-                if response.status_code == 200:
-                    results = response.json().get('results', [])
-                    dados.extend(processar_dados(results, chaves_lista))
+                resposta = requests.get(url, timeout=10)
+                if resposta.status_code == 200:
+                    resultados = resposta.json().get('results', [])
+                    dados.extend(processar_dados(resultados, chaves_lista))
                     sleep(1)
                 else:
-                    print(f"Erro: Status {response.status_code}")
+                    print(f"Erro: Status {resposta.status_code}")
             except requests.exceptions.RequestException:
                 break
 
