@@ -19,7 +19,7 @@ def tratar_dados(arquivo_csv, categoria):
     
     #Salvar os dados tratados na pasta designada
     df.to_csv(f"work/{categoria}.csv", index=False)
-    print(f"Dados de {categoria} tratados e salvos em work/{categoria}.csv")
+    print(f"Dados de tratados!")
 
 #Tratamento para todas as bases
 tratar_dados("people.csv", "people")
